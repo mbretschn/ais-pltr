@@ -28,9 +28,9 @@ export class TrackLayer extends AbstractLayer {
         }
 
         if (position.CreatedBy !== position.UpdatedBy) {
-            return `${position.format('DistanceMoved')}, ${position.format('TimeStamp', 'HH:mm:ss')}<br>${position.format('CreatedBy')}, ${position.format('UpdatedBy')}`
+            return `${position.format('DistanceMoved')}, ${position.format('Channel')}, ${position.format('TimeStamp', 'HH:mm:ss')}<br>${position.format('CreatedBy')}, ${position.format('UpdatedBy')}`
         }
-        return `${position.format('DistanceMoved')}, ${position.format('TimeStamp', 'HH:mm:ss')}<br>${position.format('CreatedBy')}`
+        return `${position.format('DistanceMoved')}, ${position.format('Channel')}, ${position.format('TimeStamp', 'HH:mm:ss')}<br>${position.format('CreatedBy')}`
     }
 
     private onEachFeature = async (feature: any, layer: any): Promise<void> => {
@@ -58,22 +58,8 @@ export class TrackLayer extends AbstractLayer {
         this.layer.addData(features)
     }
 
-    public layerClicked = async (ev: any): Promise<void> => {
-        // const _id = ev.layer.feature.properties._id
-        // const positions = this.ship.positions
-        // const position = positions.collection.find(item => item._id === _id)
-
-        // if (position) {
-        //     this.broadcast(`${this.name}:clicked`, { position })
-        // }
-    }
-
     public attachEvents(): boolean {
         this.ship.on('position', this.addFragment)
-
-        if (this.layer) {
-            this.layer.on('click', this.layerClicked)
-        }
 
         return super.attachEvents()
     }
@@ -81,10 +67,6 @@ export class TrackLayer extends AbstractLayer {
     public detachEvents(): boolean {
         this.ship.off('position', this.addFragment)
         this.ship.unsubscribe()
-
-        if (this.layer) {
-            this.layer.off('click', this.layerClicked)
-        }
 
         return super.detachEvents()
     }

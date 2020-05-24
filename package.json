@@ -1,7 +1,7 @@
 {
   "name": "ais-pltr",
-  "version": "0.9.9",
-  "description": "",
+  "version": "0.9.10",
+  "description": "A AIS Chartplotter for display positions and tracks of vessels. Frontend for AIS-PLTR-SRV.",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --colors",
     "start": "webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0 --disable-host-check"
@@ -52,7 +52,7 @@
   "dependencies": {
     "@sweetalert2/theme-material-ui": "^3.1.4",
     "@sweetalert2/theme-minimal": "^3.1.4",
-    "ais-tools": "^0.9.9",
+    "ais-tools": "^0.9.10",
     "animate.css": "^3.7.2",
     "awesome-typescript-loader": "^5.2.1",
     "better-queue": "^3.8.10",
