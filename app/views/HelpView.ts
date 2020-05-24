@@ -22,10 +22,13 @@ export class HelpView extends AbstractView {
     private interrupt: boolean = false
     private clicked: boolean = false
     private slideSpeed: string = 'faster'
+    private slidesShown: any
 
     constructor() {
         super()
         this.frame = 0
+        this.timeout = undefined
+        this.slidesShown = undefined
         this.add('close', new CloseIconButtonView(this.selector, this))
         this.register('change', '.dialog.help .help-links', this.selectedFrame)
     }
@@ -114,6 +117,9 @@ export class HelpView extends AbstractView {
     }
 
     public close = async (): Promise<void> => {
+        if (this.slidesShown === false) {
+            this.broadcast('view:shown')
+        }
         await this.remove()
         this.el.innerHTML = ''
     }
@@ -127,8 +133,8 @@ export class HelpView extends AbstractView {
 
         html.push(`<div class="help-container">`)
         html.push(`<div class="presentation">`)
+        html.push(`<div class="outer"><p class="inner animated flash infinite slow">Loading...</p></div>`)
         for (let idx=0; idx < this.presentations.length; idx++) {
-            // const display = this.frame !== idx ? ' style="display: none;"' : ''
             const display = ' style="display: none;"'
             html.push(`<iframe src="${this.presentations[idx]}" id="slide-${idx}" frameborder="0" width="750" height="570"${display}></iframe>`)
         }
@@ -155,10 +161,14 @@ export class HelpView extends AbstractView {
     }
 
     public attachEvents(): boolean {
+        this.slidesShown = false
         this.broadcast('view:showing')
         const cur = this.element(`#slide-${this.frame}`) as HTMLIFrameElement
+        const wait = this.element(`.outer`) as HTMLElement
         cur.addEventListener('load', async () => {
+            wait.remove()
             this.broadcast('view:shown')
+            this.slidesShown = true
             await this.showSlide(cur)
             this.timeout = setTimeout(this.next, this.timeouts[this.frame])
         }, { once: true })

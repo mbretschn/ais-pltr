@@ -9,6 +9,7 @@ export declare class HelpView extends AbstractView {
     private interrupt;
     private clicked;
     private slideSpeed;
+    private slidesShown;
     constructor();
     private hideSlide;
     private showSlide;

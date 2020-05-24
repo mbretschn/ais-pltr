@@ -12,7 +12,7 @@ export class ShipImageView extends AbstractView {
     private uuid: string
     private ship: Ship
     private dropzone?: Dropzone
-    private isUploadAllowd: boolean = true
+    private isUploadAllowd: boolean = false
 
     constructor(selector: string, ship: Ship) {
         super()
