@@ -1,0 +1,84 @@
+@mixin data-table() {
+    .mdc-top-app-bar {
+        position: absolute;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        height: 64px;
+        width: 100%;
+        margin: 0;
+    }
+
+    .data-table {
+        position: relative;
+        overflow-y: auto;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        top: 64px;
+        height: calc(100% - 64px);
+        width: 100%;
+        margin: 0;
+
+        thead {
+            th {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                background-color: white;
+                &:after {
+                    content: "";
+                    height: 1px;
+                    width: 100%;
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0px;
+                    border-bottom-width: 1px;
+                    border-bottom-style: solid;
+                    border-bottom-color: rgba(0, 0, 0, 0.12);
+                }
+            }
+        }
+
+        tbody tr {
+            border-top-width: 0px;
+            td {
+                position: relative;
+                &:after {
+                    content: "";
+                    height: 1px;
+                    width: 100%;
+                    position: absolute;
+                    bottom: 0px;
+                    left: 0px;
+                    border-bottom-width: 1px;
+                    border-bottom-style: solid;
+                    border-bottom-color: rgba(0, 0, 0, 0.12);
+                }
+            }
+        }
+
+        &.tstart {
+            tbody.head {
+                transform: translateY(-52px);
+            }
+            tbody.tail {
+                transform: translateY(-52px);
+            }
+        }
+
+        &.tanimated {
+            tbody.head,
+            tbody.tail {
+                transition-duration: 0.5s;
+                transition-property: transform;
+                transition-timing-function: ease-in-out;
+            }
+        }
+
+        &.trun {
+            tbody.head,
+            tbody.tail {
+                transform: translateY(0px);
+            }
+        }
+    }
+}

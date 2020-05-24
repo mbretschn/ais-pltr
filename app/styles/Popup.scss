@@ -1,0 +1,35 @@
+.leaflet-popup {
+    width: 300px;
+
+    .mdc-linear-progress__bar-inner {
+        border-color: rgb(241, 52, 52) !important;
+    }
+
+    .leaflet-popup-content {
+        width: 300px;
+    }
+
+    .leaflet-popup-content-wrapper {
+        padding: 0px;
+        .leaflet-popup-content {
+            margin: 0;
+        }
+    }
+
+    .popup-card__primary,
+    .popup-card__secondary {
+        padding: 0 1rem;
+    }
+
+    .popup-card {
+        width: 300px;
+        @include ship-image(300px, 200px);
+    }
+
+    .position-popup-content {
+        .label {
+            width: 50%;
+            display: inline-block;
+        }
+    }
+}

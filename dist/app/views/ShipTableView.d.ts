@@ -1,0 +1,30 @@
+import { ShipCollection } from 'ais-tools';
+import { AbstractView } from '../lib';
+export declare class ShipTableView extends AbstractView {
+    name: string;
+    selector: string;
+    private collection;
+    private format;
+    private idx;
+    private f;
+    private fields;
+    private asc;
+    show: () => Promise<void>;
+    hide: () => Promise<void>;
+    constructor(collection: ShipCollection);
+    close: () => Promise<void>;
+    private compare;
+    private clearFilter;
+    private setFilter;
+    private filter;
+    private order;
+    private selected;
+    private animate;
+    private addShip;
+    attachEvents(): boolean;
+    detachEvents(): boolean;
+    private table;
+    private row;
+    content: () => Promise<void>;
+    render(): Promise<any>;
+}

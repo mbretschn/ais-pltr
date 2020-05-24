@@ -1,0 +1,36 @@
+export declare class Controller {
+    private logger;
+    private database;
+    private ships;
+    private pageView;
+    private drawerView;
+    private headerView;
+    private mapView;
+    private shipLayer;
+    private popupCollectionLayer;
+    private shipDetailsView?;
+    private trackCollectionLayer;
+    private positionTableView?;
+    private shipTableView;
+    private helpView?;
+    private trackHistory;
+    private helpShown;
+    constructor();
+    private helpShow;
+    private helpHide;
+    private responseHelpShown;
+    private responseShowHelp;
+    private responseToggleHistory;
+    private responseLoadHistory;
+    private responseLockedMMSI;
+    private responseLockkMMSI;
+    private responseUnlockkMMSI;
+    private showPositionTable;
+    private showShipDetail;
+    private responseTrack;
+    private responseTrackMMSI;
+    finalize(): Promise<void>;
+    initialize(): Promise<void>;
+    private handleVisibilityChange;
+    run(): Promise<void>;
+}

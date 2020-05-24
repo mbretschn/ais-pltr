@@ -1,0 +1,87 @@
+@mixin ship-image($width, $height) {
+    form {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: $width;
+        max-width: $width;
+        height: $height;
+        padding: 0;
+        border: none !important;
+        background-color: rgba(0, 0, 0, 0.1);
+
+        &.dz-drag-hover {
+            &:after {
+                content: "";
+                width: 100%;
+                height: 100%;
+                top: 0px;
+                left: 0px;
+                position: absolute;
+                background-color: rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        .dz-message {
+            position: absolute;
+            top: 50%;
+            margin: 0px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .dz-preview {
+            top: 0px;
+            margin: 0;
+            background: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            .dz-image {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .dz-error-message {
+                width: auto;
+                left: 50%;
+                top: 100%;
+                transform: translate(-50%, -20px);
+                &:after {
+                    left: 50%;
+                    transform: translate(-50%);
+                }
+            }
+        }
+
+        .mdc-card__media {
+            pointer-events: none;
+            top: 0px;
+            position: relative;
+            height: $height;
+            &:before {
+                margin-top: 0px;
+            }
+            .leaflet-control-attribution {
+                position: absolute;
+                bottom: 0px;
+                right: 0px;
+                background: #fff;
+                background: rgba(255, 255, 255, 0.7);
+                margin: 0;
+                padding: 0 5px;
+                color: #333;
+                font-size: 11px;
+                padding: 5px;
+                line-height: 1.5em;
+                a {
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}

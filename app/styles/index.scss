@@ -1,0 +1,61 @@
+@use "dropzone/dist/dropzone.css";
+@use "animate.css/animate.css";
+@use "@sweetalert2/theme-minimal/minimal.min.css";
+@use "noty/src/noty.scss";
+@use "noty/src/themes/bootstrap-v3.scss";
+
+@use "@material/theme" with (
+  $primary: #444,
+  $background: #fff,
+);
+
+@use "@material/drawer/mdc-drawer";
+@use "@material/top-app-bar/mdc-top-app-bar";
+@use "@material/button/mdc-button";
+@use "@material/icon-button/mdc-icon-button";
+@use "@material/card/mdc-card";
+@use "@material/checkbox/mdc-checkbox";
+@use "@material/radio/mdc-radio";
+@use "@material/data-table/mdc-data-table";
+@use "@material/textfield/mdc-text-field";
+@use "@material/textfield/icon";
+@use "@material/dialog/mdc-dialog";
+@use "@material/elevation/mdc-elevation";
+@use "@material/linear-progress/mdc-linear-progress";
+@use "@material/list/mdc-list";
+@use "@material/form-field/mdc-form-field";
+@use "@material/menu-surface/mdc-menu-surface";
+@use "@material/menu/mdc-menu";
+
+@import "./ShipImage";
+@import "./DataTable";
+@import "./Page";
+@import "./Header";
+@import "./Drawer";
+@import "./Map";
+@import "./Popup";
+@import "./Details";
+@import "./Collection";
+@import "./ShipTable";
+@import "./PositionTable";
+@import "./Help";
+
+.unselectable {
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.swal2-container {
+  z-index: 20000;
+}
+
+.noty_body {
+  line-height: 1.7rem;
+}

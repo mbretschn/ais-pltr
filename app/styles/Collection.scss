@@ -1,0 +1,26 @@
+.exceed {
+    z-index: 10000;
+    .mdc-dialog__container {
+        width: 500px;
+        .mdc-dialog__surface {
+            min-width: 500px;
+        }
+    }
+    .mdc-list-item .mdc-list-item__text {
+        padding-left: 10px;
+    }
+    .mdc-list-item.is-empty {
+        pointer-events: none;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .exceed {
+        .mdc-dialog__container {
+            width: 300px;
+            .mdc-dialog__surface {
+                min-width: 300px;
+            }
+        }
+    }
+}

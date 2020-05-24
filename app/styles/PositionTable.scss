@@ -1,0 +1,69 @@
+.data-table-container.positions {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    overflow-x: auto;
+
+    bottom: 0px;
+    left: 1rem;
+    height: 40vh;
+    width: calc(100% - 2rem);
+
+    .mdc-button--unelevated:disabled {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .toggle-lock-icon {
+        display: none;
+    }
+
+    @include data-table();
+
+    .data-table {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        td,
+        th {
+            cursor: pointer;
+            @extend .unselectable;
+        }
+        .position-Ind {
+            font-weight: bold;
+        }
+        .position-NavigationStatus {
+            font-weight: bold;
+        }
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .data-table-container.positions {
+        .show-details,
+        .toggle-track,
+        .toggle-lock {
+            display: none;
+        }
+
+        .toggle-lock-icon {
+            display: inline-block;
+        }
+
+        z-index: 10000;
+        top: 5rem;
+        left: 1rem;
+        height: calc(100vh - 5rem);
+        width: calc(100% - 2rem);
+
+        header {
+          height: 55px !important;
+          .field-search {
+            display: none;
+          }
+        }
+
+        .data-table {
+          top: 55px;
+          height: calc(100% - 55px);
+        }
+      }
+}

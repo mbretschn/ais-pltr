@@ -1,0 +1,19 @@
+header {
+    z-index: 9999 !important;
+    .mdc-icon-button:disabled {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    .mdc-linear-progress__bar-inner {
+        border-color: rgb(241, 52, 52) !important;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    header {
+        .zoom-in,
+        .zoom-out,
+        .help-btn {
+            display: none;
+        }
+    }
+}

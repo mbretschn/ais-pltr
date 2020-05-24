@@ -1,0 +1,55 @@
+.help {
+    display: none;
+    z-index: 10000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+
+    .help-container {
+        width: 750px;
+        height: 614px;
+        position: absolute;
+        top: calc(50vh - 307px);
+        left: calc(50vw - 375px);
+        background-color: #fff;
+        .close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 5px;
+            width: 35px;
+            height: 35px;
+        }
+        .presentation {
+            top: 20px; // 64px;
+            position: relative;
+            width: 750px;
+            height: 550px;
+            overflow: hidden;
+            background-color: #fff;
+    
+            iframe {
+                position: relative;
+                left: 8px;
+                top: -8px;
+                margin-left: -10px;
+                width: 755px;
+                height: 570px;
+            }
+        }
+        .help-links {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .mdc-linear-progress {
+            position: absolute;
+            top: 0px;
+        }
+    }
+}

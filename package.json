@@ -1,0 +1,73 @@
+{
+  "name": "ais-pltr",
+  "version": "0.9.9",
+  "description": "",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --colors",
+    "start": "webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0 --disable-host-check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3epnm/ais-pltr.git"
+  },
+  "keywords": [],
+  "author": "marcel.bretschneider@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/3epnm/ais-pltr/issues"
+  },
+  "devDependencies": {
+    "@babel/polyfill": "^7.8.7",
+    "@types/uuid": "^7.0.3",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "@types/leaflet": "^1.5.12",
+    "@types/md5": "^2.2.0",
+    "@types/node": "^13.11.0",
+    "@types/socket.io": "^2.1.4",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.2",
+    "css-loader": "^3.5.2",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
+    "file-loader": "^5.1.0",
+    "html-webpack-plugin": "^4.0.0-beta.11",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-gyp": "^6.1.0",
+    "node-sass": "^4.14.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.4",
+    "ts-loader": "^7.0.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "@sweetalert2/theme-material-ui": "^3.1.4",
+    "@sweetalert2/theme-minimal": "^3.1.4",
+    "ais-tools": "^0.9.9",
+    "animate.css": "^3.7.2",
+    "awesome-typescript-loader": "^5.2.1",
+    "better-queue": "^3.8.10",
+    "better-queue-memory": "^1.0.4",
+    "core-js": "^3.6.5",
+    "dropzone": "^5.7.0",
+    "events": "^3.1.0",
+    "leaflet": "^1.6.0",
+    "material-components-web": "^5.1.0",
+    "md5": "^2.2.1",
+    "moment": "^2.24.0",
+    "node-config-ts": "2.3.1",
+    "noty": "^3.2.0-beta",
+    "socket.io": "^2.3.0",
+    "sweetalert2": "^9.10.13",
+    "uuid": "^8.0.0"
+  }
+}

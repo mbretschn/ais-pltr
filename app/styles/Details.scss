@@ -1,0 +1,253 @@
+.shipdata__details {
+    display: none;
+    z-index: 10000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+
+    .details-card {
+        display: none;
+        position: absolute;
+        top: calc(50vh - 268px); // calc(50vh - 375px);
+        left: calc(50vw - 350px);
+        width: 700px;
+        height: 536px; // 730px;
+
+        .details-card__wrapper {
+            display: block;
+            position: relative;
+            height: 200px;
+
+            @include ship-image(300px, 200px);
+
+            .leaflet-control-attribution {
+                transform: translateY(100%);
+            }
+        }
+
+        .details-card__primary {
+            width: calc(100% - 2rem);
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            width: calc(100% - 300px - 2rem);
+        }
+
+        .details-card__secondary {
+            min-height: 260px; // 448px;
+            padding-top: 1.5rem !important;
+
+            p {
+                width: calc((100% / 3) - 15px);
+                display: inline-block;
+                padding-left: 5px;
+                padding-right: 10px;
+
+                span.label {
+                    display: block;
+                    margin-bottom: 4px;
+                    margin-left: -5px;
+                    color: gray;
+                }
+            }
+
+            .shipdata-Name {
+                font-weight: normal;
+            }
+            .shipdata-ShipType {
+                font-weight: normal;
+            }
+            .positon-NavigationStatus {
+                font-weight: normal;
+            }
+
+            .shipdata-Destination {
+                font-weight: normal;
+            }
+            .shipdata-ETA {
+                font-weight: normal;
+            }
+            .shipdata-CreatedAt {
+                font-weight: normal;
+            }
+            .shipdata-CreatedBy {
+                font-weight: normal;
+            }
+            .shipdata-MMSI {
+                font-weight: normal;
+            }
+            .shipdata-IMOnumber {
+                font-weight: normal;
+            }
+            .shipdata-CallSign {
+                font-weight: normal;
+            }
+            .shipdata-PositionType {
+                font-weight: normal;
+            }
+            .shipdata-DimA {
+                font-weight: normal;
+            }
+            .shipdata-DimB {
+                font-weight: normal;
+            }
+            .shipdata-DimC {
+                font-weight: normal;
+            }
+            .shipdata-DimD {
+                font-weight: normal;
+            }
+            .shipdata-Draught {
+                font-weight: normal;
+            }
+            .shipdata-TimeStamp {
+                font-weight: normal;
+            }
+            .shipdata-AIS {
+                font-weight: normal;
+            }
+            .shipdata-AISversion {
+                font-weight: normal;
+            }
+            .shipdata-Channel {
+                font-weight: normal;
+            }
+            .shipdata-Revision {
+                font-weight: normal;
+            }
+            .shipdata-Sender {
+                width: calc(50% - 15px);
+            }
+            .shipdata-_id {
+                font-weight: normal;
+            }
+
+            .positon-DistanceMoved {
+                font-weight: normal;
+            }
+            .positon-TimeStamp {
+                font-weight: normal;
+            }
+            .positon-Sequence {
+                font-weight: normal;
+            }
+            .positon-Latitude {
+                font-weight: normal;
+            }
+            .positon-Longitude {
+                font-weight: normal;
+            }
+            .positon-TrueHeading {
+                font-weight: normal;
+            }
+            .positon-CreatedAt {
+                font-weight: normal;
+            }
+            .positon-CreatedBy {
+                font-weight: normal;
+            }
+            .positon-MMSI {
+                font-weight: normal;
+            }
+            .positon-ROT {
+                font-weight: normal;
+            }
+            .positon-SOG {
+                font-weight: normal;
+            }
+            .positon-COG {
+                font-weight: normal;
+            }
+            .positon-PositionAccuracy {
+                font-weight: normal;
+            }
+            .positon-TimeStampStatus {
+                font-weight: normal;
+            }
+            .positon-AIS {
+                font-weight: normal;
+            }
+            .positon-_id {
+                font-weight: normal;
+            }
+            .positon-Sender {
+                width: calc(50% - 15px);
+            }
+        }
+
+        .details-card__primary,
+        .details-card__secondary {
+            padding: 0 1rem;
+        }
+
+        .mdc-card__action-buttons {
+            margin-left: auto;
+        }
+    }
+}
+
+
+@media only screen and (max-device-width: 480px) {
+    .shipdata__details {
+        .details-card {
+            display: none;
+            position: absolute;
+            top: 10px;
+            left: calc(50vw - 150px);
+            width: 300px;
+            height: calc(100% - 20px);
+
+            .details-card__wrapper {
+                display: block;
+                position: relative;
+                height: 100px;
+
+                @include ship-image(100px, 100px);
+
+                form {
+                    height: 150px;
+                }
+
+                .leaflet-control-attribution {
+                    height: 50px;
+                }
+            }
+
+            .details-card__primary {
+                right: auto;
+                left: 100px;
+                width: calc(100% - 120px);
+                bottom: auto;
+                top: 0px;
+            }
+
+            .details-card__secondary {
+                position: absolute;
+                top: 150px;
+                padding-top: 0px !important;
+                height: calc(100% - 200px);
+                min-height: calc(100% - 200px);
+                overflow-y: scroll;
+
+                p {
+                    width: calc((100% / 2) - 15px);
+                }
+            }
+
+            .mdc-card__actions {
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+            }
+        }
+
+        .shipdata-Sender, .shipdata-_id,
+        .positon-_id, .positon-Sender {
+            display: none !important;
+        }
+    }
+}

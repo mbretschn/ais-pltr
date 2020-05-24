@@ -1,0 +1,30 @@
+import { Popup } from 'leaflet';
+import { ILatLng } from 'ais-tools';
+import { AbstractView } from '../lib';
+export declare class MapView extends AbstractView {
+    name: string;
+    selector: string;
+    private _map;
+    private options;
+    private BBoxString;
+    private layers;
+    constructor(options?: any);
+    get map(): any;
+    centerPosition: (ev: any) => void;
+    setView(location: ILatLng, options?: any): void;
+    setBounds: () => void;
+    setBbox: (ev: any) => void;
+    getBounds: () => void;
+    removeFromMap(type: string): void;
+    addToMap(type: string, layer: any): void;
+    openPopup(popup: Popup): void;
+    closePopup(popup: Popup): void;
+    private broadcastMapState;
+    private zoomIn;
+    private zoomOut;
+    private showAllFeatures;
+    mapClicked: (ev: any) => void;
+    attachEvents(): boolean;
+    detachEvents(): boolean;
+    content(): Promise<void>;
+}
