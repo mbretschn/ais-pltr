@@ -6,7 +6,7 @@ import { MapView } from '../views'
 
 export class TrackCollectionLayer extends AbstractLayer {
     public name: string = 'TrackLayerCollectionView'
-    public selector: string = '.mdc-dialog.exceed'
+    public selector: string = '.mdc-dialog'
 
     private collection: any[] = []
     private map: MapView
@@ -81,7 +81,7 @@ export class TrackCollectionLayer extends AbstractLayer {
     }
 
     private listSubtitle = (isExceed: boolean = false) => {
-        let subtitle = isExceed ? 'Select a Track fror removal' : 'Remove a track continue.'
+        let subtitle = isExceed ? 'Select a Track for removal' : 'Remove a track continue.'
 
         return this.toDocumentFragment(`<p class="mdc-typography--body1">${subtitle}</p>`)
     }

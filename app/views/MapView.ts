@@ -9,11 +9,12 @@ export class MapView extends AbstractView {
 
     private options: any = {
         url: '/osm/{z}/{x}/{y}.png',
-        attribution: 'AIS Plotter &copy; <a href="https://github.com/3epnm/ais-plotter">GitHub</a> | Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        attribution: '<a href="https://blog.3epnm.de/2020/05/19/AIS-PLTR/">AIS PLTR</> &copy; <a href="https://github.com/3epnm/ais-plotter">GitHub</a> | Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
         center: [ 53.52592139730874, 9.96837615966797 ],
         zoom: 13,
         maxZoom: 19,
-        minZoom: 11
+        minZoom: 12,
+        maxBounds: [[53.59352364852595, 10.143127441406252], [53.42528711599427, 9.645652770996096]]
     }
 
     private BBoxString: string = window.location.hash.substr(1)
@@ -116,7 +117,7 @@ export class MapView extends AbstractView {
 
     private showAllFeatures = () => {
         if (this.layers[0]) {
-            this._map.fitBounds(this.layers[0].layer.getBounds())
+            this._map.fitBounds([[53.59352364852595, 10.143127441406252], [53.42528711599427, 9.645652770996096]]) // (this.layers[0].layer.getBounds())
         }
         this.broadcastMapState()
     }
@@ -160,7 +161,10 @@ export class MapView extends AbstractView {
     }
 
     public async content(): Promise<void> {
-        this._map = L.map(this.el, { zoomControl: false }).setView(this.options.center, this.options.zoom)
+        this._map = L.map(this.el, { 
+            zoomControl: false, 
+            maxBounds: this.options.maxBounds
+        }).setView(this.options.center, this.options.zoom)
 
         L.tileLayer(this.options.url, {
             maxZoom: this.options.maxZoom,

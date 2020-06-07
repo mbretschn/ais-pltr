@@ -8,7 +8,6 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.1);
     font-size: 14px;
-
     .help-container {
         width: 750px;
         height: 614px;
@@ -16,6 +15,7 @@
         top: calc(50vh - 307px);
         left: calc(50vw - 375px);
         background-color: #fff;
+        border-radius: 4px;
         .outer {
             width: 100%;
             height: 100%;
@@ -29,22 +29,13 @@
                 font-family: var(--mdc-typography-headline6-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
             }
         }
-        .close {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            padding: 5px;
-            width: 35px;
-            height: 35px;
-        }
         .presentation {
-            top: 20px; // 64px;
+            top: 10px;
             position: relative;
             width: 750px;
             height: 550px;
             overflow: hidden;
             background-color: #fff;
-    
             iframe {
                 position: relative;
                 left: 8px;
@@ -56,13 +47,15 @@
         }
         .help-links {
             position: absolute;
-            bottom: 5px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
         }
-        .mdc-linear-progress {
+
+        .mdc-dialog__actions {
             position: absolute;
-            top: 0px;
+            bottom: 0px;
+            right: 0px;
         }
     }
 }

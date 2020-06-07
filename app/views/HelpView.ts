@@ -1,5 +1,5 @@
 import { AbstractView } from '../lib'
-import { CloseIconButtonView } from '../buttons'
+import { CloseButtonView } from '../buttons'
 
 export class HelpView extends AbstractView {
     public name: string = 'HelpView'
@@ -29,7 +29,7 @@ export class HelpView extends AbstractView {
         this.frame = 0
         this.timeout = undefined
         this.slidesShown = undefined
-        this.add('close', new CloseIconButtonView(this.selector, this))
+        this.add('close', new CloseButtonView(this.selector, this))
         this.register('change', '.dialog.help .help-links', this.selectedFrame)
     }
 
@@ -139,7 +139,6 @@ export class HelpView extends AbstractView {
             html.push(`<iframe src="${this.presentations[idx]}" id="slide-${idx}" frameborder="0" width="750" height="570"${display}></iframe>`)
         }
         html.push(`</div>`)
-        html.push(this.get('close').preRender())
         html.push(`<div class="help-links">`)
         for (let idx=0; idx < this.presentations.length; idx++) {
             const checked = this.frame === idx ? ' checked' : ''
@@ -154,6 +153,9 @@ export class HelpView extends AbstractView {
                 </div>
             </div>`)
         }
+        html.push(`</div>`)
+        html.push(`<div class="mdc-dialog__actions">`)
+        html.push(this.get('close').preRender())
         html.push(`</div>`)
         html.push(`</div>`)
 

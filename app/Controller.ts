@@ -1,6 +1,6 @@
 import { ShipCollection } from 'ais-tools'
 import { Database, MessageLogger } from './lib'
-import { PageView, DrawerView, HeaderView, MapView, ShipDetailsView, PositionTableView, ShipTableView, HelpView } from './views'
+import { PageView, DrawerView, HeaderView, MapView, ShipDetailsView, PositionTableView, ShipTableView, HelpView, StatisticsView } from './views'
 import { ShipLayer, PopupCollectionLayer, TrackCollectionLayer } from './layer'
 import { default as Swal } from 'sweetalert2/src/sweetalert2.js'
 
@@ -20,9 +20,11 @@ export class Controller {
     private positionTableView?: PositionTableView
     private shipTableView: ShipTableView
     private helpView?: HelpView
+    private statisticsView?: StatisticsView
 
     private trackHistory: boolean = true
     private helpShown: boolean = false
+    private statisticsShown: boolean = false
 
     constructor() {
         this.logger = new MessageLogger()
@@ -46,6 +48,8 @@ export class Controller {
 
         document.addEventListener('ship:detail', this.showShipDetail, false)
         document.addEventListener('ship:positions', this.showPositionTable, false)
+
+        document.addEventListener('request:ships', this.responseCollection, false)
         document.addEventListener('request:track', this.responseTrack, false)
         document.addEventListener('request:track:mmsi', this.responseTrackMMSI, false)
         document.addEventListener('request:lock:mmsi', this.responseLockkMMSI, false)
@@ -53,29 +57,52 @@ export class Controller {
         document.addEventListener('request:locked:mmsi', this.responseLockedMMSI, false)
         document.addEventListener('request:toggle:history', this.responseToggleHistory, false)
         document.addEventListener('request:load:history', this.responseLoadHistory, false)
-
         document.addEventListener('request:help:shown', this.responseHelpShown, false)
         document.addEventListener('request:show:help', this.responseShowHelp, false)
+        document.addEventListener('request:statistics:shown', this.responseStatisticsShown, false)
+        document.addEventListener('request:statistics:show', this.responseStatisticsShow, false)
 
         document.addEventListener('visibilitychange', this.handleVisibilityChange, false)
-
-        document.addEventListener('view:shown', this.helpShow)
-        document.addEventListener('view:hidden', this.helpHide)
+        document.addEventListener('view:shown', this.viewShow)
+        document.addEventListener('view:hidden', this.viewHide)
 
         this.run()
     }
 
-    private helpShow = (ev: any): void => {
+    private responseCollection = (): void => {
+        document.dispatchEvent(new CustomEvent('response:ships', { detail: this.ships }))
+    }
+
+    private responseStatisticsShown = (): void => {
+        document.dispatchEvent(new CustomEvent('response:statistics:shown', { detail: this.statisticsShown }))
+    }
+
+    private responseStatisticsShow = async (ev: any): Promise<void> => {
+        this.statisticsView = new StatisticsView()
+        await this.statisticsView.render()
+    }
+
+    private viewShow = (ev: any): void => {
         if (ev.detail.name === 'HelpView') {
             this.helpShown = true
             this.responseHelpShown()
         }
+
+        if (ev.detail.name === 'StatisticsView') {
+            this.helpShown = true
+            this.responseStatisticsShown()
+        }
     }
 
-    private helpHide = (ev: any): void => {
+    private viewHide = (ev: any): void => {
         if (ev.detail.name === 'HelpView') {
             this.helpShown = false
             this.responseHelpShown()
+        }
+
+        if (ev.detail.name === 'StatisticsView') {
+            this.helpShown = false
+            this.responseStatisticsShown()
         }
     }
 
@@ -84,12 +111,8 @@ export class Controller {
     }
 
     private responseShowHelp = async (ev: any): Promise<void> => {
-        this.helpShown = true
-
         this.helpView = new HelpView()
         await this.helpView.render()
-
-        this.responseHelpShown()
     }
 
     private responseToggleHistory = (ev: any): void => {
@@ -194,6 +217,7 @@ export class Controller {
         try {
             await this.initialize()
         } catch (ex) {
+            console.log(ex)
             document.dispatchEvent(new CustomEvent('unset:waitstate'))
 
             Swal.fire({

@@ -10,7 +10,7 @@ export class TrackCollectionButtonView extends AbstractButtonView {
     constructor(selector: string, style: string = 'icon') {
         super(selector)
         this.style = style
-        this.register('click', '.show-panel', this.showPanel)
+        this.register('click', '.show-track-collection', this.showPanel)
         this.subscribe('ship:track', this.update)
         this.subscribe('response:track', this.render)
     }
@@ -21,7 +21,7 @@ export class TrackCollectionButtonView extends AbstractButtonView {
 
     private showPanel = (): void => {
         this.broadcast('track:collection:panel')
-        this.element('.show-panel').blur()
+        this.element('.show-track-collection').blur()
     }
 
     public async content(ev: any): Promise<DocumentFragment> {
@@ -29,14 +29,14 @@ export class TrackCollectionButtonView extends AbstractButtonView {
 
         if (this.style !== 'icon') {
             return this.toDocumentFragment(`
-                <a class="mdc-list-item ${this.class} show-panel" href="#" aria-current="page"${!can && ' disabled="disabled"'}>
+                <a class="mdc-list-item ${this.class} show-track-collection" href="#" aria-current="page"${!can && ' disabled="disabled"'}>
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">list</i>
                     <span class="mdc-list-item__text">${can && this.textA || this.textB}</span>
                 </a>`)
         }
 
         return this.toDocumentFragment(`<button
-            class="${this.class} show-panel ${this.classList}"
+            class="${this.class} show-track-collection ${this.classList}"
             aria-label="${can && this.textA || this.textB}"${!can && ' disabled="disabled"'}>list</button>`)
     }
 }

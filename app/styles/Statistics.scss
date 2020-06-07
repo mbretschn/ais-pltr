@@ -1,0 +1,62 @@
+.statistic {
+    display: none;
+    z-index: 10000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    .statistic-container {
+        width: 540px;
+        height: 360px;
+        position: absolute;
+        top: calc(50vh - 180px);
+        left: calc(50vw - 270px);
+        background-color: #fff;
+        border-radius: 4px;
+
+        h2 {
+            font-size: 15px;
+            height: 45px;
+            &:before {
+                height: 28px;
+            }
+        }
+
+        .statistic-items {
+            padding: 0px 20px;
+        }
+        
+        .statistic-item {
+            width: 25%;
+            height: 100%;
+            float: left;
+            text-align: center;
+
+            .statistic-item__chart-all,
+            .statistic-item__chart-unique {
+                position: relative;
+                .percent {
+                    position: absolute;
+                    top: 50%;
+                    left: 0px;
+                    width: 100%;
+                    transform: translateY(-50%);
+                }
+            }
+
+            h3, .percent {
+                text-transform: uppercase;
+                color: var(--mdc-theme-primary, #444);
+            }
+        }
+
+        .mdc-dialog__actions {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+        }
+    }
+}

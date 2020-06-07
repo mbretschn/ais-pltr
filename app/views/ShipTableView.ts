@@ -106,7 +106,7 @@ export class ShipTableView extends AbstractView {
             }
 
             cr.style.display = 'none'
-            if (this.compare([ins[1],ins[2],ins[5]])) {
+            if (this.compare([ins[0],ins[1],ins[4]])) {
                 cr.style.display = ''
             }
         }
@@ -221,7 +221,6 @@ export class ShipTableView extends AbstractView {
         html.push(`<table class="mdc-data-table__table" aria-label="Nmea Shipdata">`)
         html.push(`<thead>`)
         html.push(`<tr class="mdc-data-table__header-row unselectable">`)
-        html.push(`<th class="mdc-data-table__header-cell shipdata-Ind">#</th>`)
         for (const field of this.fields) {
             html.push(`<th class="mdc-data-table__header-cell shipdata-${field}" role="columnheader" scope="col">${field}</th>`)
         }
@@ -237,7 +236,6 @@ export class ShipTableView extends AbstractView {
     private row(shipdata: INmeaShipdata, idx: number): DocumentFragment {
         const html: string[] = []
         html.push(`<tr data-idx="${idx}" data-row-id="${shipdata._id}" data-mmsi="${shipdata.MMSI}" class="mdc-data-table__row positions-data-row">`)
-        html.push(`<td class="mdc-data-table__cell shipdata-Ind">${idx}</td>`)
 
         for (const field of this.fields) {
             if ('TimeStamp,CreatedAt,UpdatedAt'.indexOf(field) >= 0) {

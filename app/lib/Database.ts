@@ -185,7 +185,7 @@ export class Database extends AbstractDatabase implements IDatabase {
             query.push(`limit=${limit}`)
         }
         if (options) {
-            query.push(`&options=${JSON.stringify(options)}`)
+            query.push(`options=${JSON.stringify(options)}`)
         }
 
         let request = `${this.config.host}/${colName}`

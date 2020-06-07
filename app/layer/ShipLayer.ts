@@ -91,7 +91,7 @@ export class ShipLayer extends AbstractLayer {
             this.layer.addData(ship.toFeature())
 
             if (this._lockedMMSI == mmsi) {
-                this.broadcast('position:selected', { position: ship.position})
+                this.broadcast('position:selected', { position: ship.position })
             }
         } catch (ex) { }
     }

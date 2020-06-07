@@ -1,4 +1,4 @@
-.exceed {
+.mdc-dialog {
     z-index: 10000;
     .mdc-dialog__container {
         width: 500px;
@@ -15,7 +15,7 @@
 }
 
 @media only screen and (max-device-width: 480px) {
-    .exceed {
+    .mdc-dialog {
         .mdc-dialog__container {
             width: 300px;
             .mdc-dialog__surface {

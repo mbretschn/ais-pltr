@@ -20,10 +20,10 @@ export class PageView extends AbstractView {
                     <div class="data-table-container positions"></div>
                     <div class="dialog shipdata__details"></div>
                     <div class="dialog help"></div>
+                    <div class="dialog statistic"></div>
                     <div class="dialog alert"></div>
-                    <!--div class="mdc-top-app-bar--fixed-adjust"></div-->
             </main>
-            <div class="mdc-dialog exceed"></div>`)
+            <div class="mdc-dialog"></div>`)
 
         return this.toDocumentFragment(html)
     }

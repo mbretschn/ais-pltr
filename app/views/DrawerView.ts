@@ -1,6 +1,6 @@
 import { MDCDrawer } from "@material/drawer"
 import { AbstractLayer } from '../lib'
-import { MapShowAllFeaturesButtonView, TrackCollectionButtonView, ShipTableButtonView, UnlockIconButtonView, TrackHistoryButtonView } from '../buttons'
+import { MapShowAllFeaturesButtonView, TrackCollectionButtonView, ShipTableButtonView, StatisticsButtonView, TrackHistoryButtonView } from '../buttons'
 
 export class DrawerView extends AbstractLayer {
     public name: string = 'Drawer'
@@ -13,7 +13,7 @@ export class DrawerView extends AbstractLayer {
         this.add('trackCol', new TrackCollectionButtonView(this.selector, 'nav'))
         this.add('showAll', new MapShowAllFeaturesButtonView(this.selector, 'nav'))
         this.add('ships', new ShipTableButtonView(this.selector, 'nav'))
-        // this.add('lock', new UnlockIconButtonView(this.selector, 'nav'))
+        this.add('statistics', new StatisticsButtonView(this.selector, 'nav'))
         this.add('history', new TrackHistoryButtonView(this.selector))
 
         this.subscribe('menu:clicked', this.toggleDrawer)
@@ -23,6 +23,7 @@ export class DrawerView extends AbstractLayer {
         this.subscribe('map:show:all:features', this.drawerClose)
         this.subscribe('ships:table', this.drawerClose)
         this.subscribe('request:unlock:mmsi', this.drawerClose)
+        this.subscribe('request:statistics:show', this.drawerClose)
     }
 
     private toggleDrawer = () => {
@@ -50,11 +51,11 @@ export class DrawerView extends AbstractLayer {
             <nav class="mdc-list">`)
 
         html.push(this.get('showAll').preRender())
-        // html.push(this.get('lock').preRender())
         html.push(this.get('history').preRender())
         html.push(this.get('trackCol').preRender())
         html.push(this.get('ships').preRender())
-
+        html.push(this.get('statistics').preRender())
+        
         html.push(`</nav>
             </div>`)
 

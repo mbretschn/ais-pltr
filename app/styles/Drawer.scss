@@ -1,3 +1,8 @@
 .mdc-drawer {
     z-index: 9998;
 }
+@media only screen and (max-device-width: 480px) {
+    .mdc-drawer .show-statistics {
+        display: none;
+    }
+}
