@@ -64,33 +64,13 @@ export class Database extends AbstractDatabase implements IDatabase {
         this.uuid = uuidv4()
 
         window.addEventListener("beforeunload", this.disconnect, false)
-        // document.addEventListener('visibilitychange', this.handleVisibilityChange, false)
     }
 
     private reconnect = (ev:any) => {
         this.socket.emit('subscribe', { uuid: this.uuid })
     }
 
-    // private handleVisibilityChange = (ev: any): void => {
-    //     if (document['hidden']) {
-    //         console.log('in Background')
-    //     } else {
-    //         console.log('in Foreground')
-    //     }
-    // }
-
     private unsubscribe(): void {
-        // this.socket.off('connect', (ev: any) => console.log('connect'))
-        // this.socket.off('connect_error', (ev: any) => console.log('connect_error'))
-        // this.socket.off('connect_timeout', (ev: any) => console.log('connect_timeout'))
-        // this.socket.off('error', (ev: any) => console.log('error'))
-        // this.socket.off('disconnect', (ev: any) => console.log('disconnect'))
-        // this.socket.off('reconnect', (ev: any) => console.log('reconnect'))
-        // this.socket.off('reconnect_attempt', (ev: any) => console.log('reconnect_attempt'))
-        // this.socket.off('reconnecting', (ev: any) => console.log('reconnecting'))
-        // this.socket.off('reconnect_error', (ev: any) => console.log('reconnect_error'))
-        // this.socket.off('reconnect_failed', (ev: any) => console.log('reconnect_failed'))
-
         this.socket.emit('unsubscribe', { uuid: this.uuid })
 
         this.socket.off('positions', this.onPositions)
@@ -99,17 +79,6 @@ export class Database extends AbstractDatabase implements IDatabase {
     }
 
     private subscribe(): void {
-        // this.socket.on('connect', (ev: any) => console.log('connect'))
-        // this.socket.on('connect_error', (ev: any) => console.log('connect_error'))
-        // this.socket.on('connect_timeout', (ev: any) => console.log('connect_timeout'))
-        // this.socket.on('error', (ev: any) => console.log('error'))
-        // this.socket.on('disconnect', (ev: any) => console.log('disconnect'))
-        // this.socket.on('reconnect', (ev: any) => console.log('reconnect'))
-        // this.socket.on('reconnect_attempt', (ev: any) => console.log('reconnect_attempt'))
-        // this.socket.on('reconnecting', (ev: any) => console.log('reconnecting'))
-        // this.socket.on('reconnect_error', (ev: any) => console.log('reconnect_error'))
-        // this.socket.on('reconnect_failed', (ev: any) => console.log('reconnect_failed'))
-
         this.socket.on('positions', this.onPositions)
         this.socket.on('ships', this.onShips)
         this.socket.on('reconnect', this.reconnect)
@@ -123,8 +92,7 @@ export class Database extends AbstractDatabase implements IDatabase {
 
         this.socket = io()
         this.subscribe()
-        
-        // console.log('database connected')
+
         return
     }
 
@@ -132,29 +100,18 @@ export class Database extends AbstractDatabase implements IDatabase {
         if (!this.connected) return
         this.connected = false
 
-        // if (this.timer) {
-        //     clearTimeout(this.timer)
-        // }
-
         this.unsubscribe()
         this.socket = undefined
-        
-        // console.log('database disconnected')
         return
     }
 
-    private onPositions = (data: INmeaShipdata) => {
-        // if (this.timer) {
-        //     clearTimeout(this.timer)
-        // }
-        // this.timer = setTimeout(this.reconnect, 120000)
-
+    private onPositions = (data: INmeaPosition) => {
         for (let i = 0; i < this.emitters.length; i++) {
             this.emitters[i].add('NmeaPosition', data)
         }
     }
 
-    private onShips = (data: INmeaPosition) => {
+    private onShips = (data: INmeaShipdata) => {
         for (let i = 0; i < this.emitters.length; i++) {
             this.emitters[i].add('NmeaShipdata', data)
         }

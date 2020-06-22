@@ -18,10 +18,10 @@ const styles = (color: Color, idx: number) => {
         'color': color.get(idx),
         'font-size': '13px',
         'line-height': '13px'
-    } 
+    }
 
     return Object.keys(styles).map(style => style + ':' + styles[style]).join(';')
-} 
+}
 
 const logo = () => {
     const idx = Math.floor(Math.random() * Math.floor(ColorSchemes.length))
@@ -36,7 +36,7 @@ const logo = () => {
     s.push(styles(color, 0))
 
    console.log(`
-%c █████╗ ██╗███████╗  ██████╗ ██╗  ████████╗██████╗ 
+%c █████╗ ██╗███████╗  ██████╗ ██╗  ████████╗██████╗
 %c██╔══██╗██║██╔════╝  ██╔══██╗██║  ╚══██╔══╝██╔══██╗
 %c███████║██║███████╗  ██████╔╝██║     ██║   ██████╔╝
 %c██╔══██║██║╚════██║  ██╔═══╝ ██║     ██║   ██╔══██╗
@@ -46,7 +46,7 @@ const logo = () => {
 %c         https://github.com/3epnm/ais-pltr
 
 %c        ais-pltr v${main.version}, ais-tools v${tools.version}
-`, s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[2])                                                
+`, s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[2])
 }
 
 logo()

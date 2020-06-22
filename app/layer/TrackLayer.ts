@@ -58,34 +58,14 @@ export class TrackLayer extends AbstractLayer {
         this.layer.addData(features)
     }
 
-    public layerClicked = async (ev: any): Promise<void> => {
-        // const _id = ev.layer.feature.properties._id
-        // const positions = this.ship.positions
-        // const position = positions.collection.find(item => item._id === _id)
-
-        // if (position) {
-        //     this.broadcast(`${this.name}:clicked`, { position })
-        // }
-    }
-
     public attachEvents(): boolean {
         this.ship.on('position', this.addFragment)
-
-        if (this.layer) {
-            this.layer.on('click', this.layerClicked)
-        }
-
         return super.attachEvents()
     }
 
     public detachEvents(): boolean {
         this.ship.off('position', this.addFragment)
         this.ship.unsubscribe()
-
-        if (this.layer) {
-            this.layer.off('click', this.layerClicked)
-        }
-
         return super.detachEvents()
     }
 
@@ -102,7 +82,7 @@ export class TrackLayer extends AbstractLayer {
         this.ship.positions.color = this.color
 
         this.broadcast('set:waitstate')
-        
+
         await new Promise (async (resolve) => {
             const onLoadHistory = async (ev: any) => {
                 if (ev.detail === true) {
@@ -114,7 +94,7 @@ export class TrackLayer extends AbstractLayer {
             document.addEventListener('response:load:history', onLoadHistory, false)
             this.broadcast('request:load:history')
         })
-        
+
         await this.ship.subscribe()
 
         const featureCollection: FeatureCollection = {

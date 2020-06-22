@@ -16,8 +16,9 @@ export declare class Controller {
     private trackHistory;
     private helpShown;
     constructor();
-    private helpShow;
-    private helpHide;
+    private responseCollection;
+    private viewShow;
+    private viewHide;
     private responseHelpShown;
     private responseShowHelp;
     private responseToggleHistory;

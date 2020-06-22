@@ -16,6 +16,7 @@ export declare abstract class AbstractView extends EventEmitter {
     subViews: any[];
     private animationSpeed;
     close: () => Promise<void>;
+    refresh: () => Promise<void>;
     add(name: string, view: any): void;
     get(name: string): any;
     hide(): Promise<void>;

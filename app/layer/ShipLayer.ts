@@ -72,9 +72,9 @@ export class ShipLayer extends AbstractLayer {
 
     private update = async (data: any): Promise<void> => {
         let mmsi, ship
-        
+
         try {
-            if (data instanceof Ship || data instanceof NmeaPositionFeature) {
+            if (data.MMSI) {
                 mmsi = data.MMSI
                 ship = await this.collection.findByMMSI(mmsi, { cache: true, force: false })
             } else if (data.detail && data.detail.ship) {
@@ -93,7 +93,9 @@ export class ShipLayer extends AbstractLayer {
             if (this._lockedMMSI == mmsi) {
                 this.broadcast('position:selected', { position: ship.position })
             }
-        } catch (ex) { }
+        } catch (ex) {
+            // No Shipdata
+        }
     }
 
     private unselect = (): void => {

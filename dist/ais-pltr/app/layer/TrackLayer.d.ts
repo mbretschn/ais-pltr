@@ -13,7 +13,6 @@ export declare class TrackLayer extends AbstractLayer {
     private onEachFeature;
     private style;
     addFragment: (position: NmeaPositionFeature) => Promise<void>;
-    layerClicked: (ev: any) => Promise<void>;
     attachEvents(): boolean;
     detachEvents(): boolean;
     remove(): Promise<void>;

@@ -146,7 +146,7 @@ export class ShipTableView extends AbstractView {
                 this.broadcast('position:selected', { position: ship.position })
                 this.broadcast('ship:selected', { ship })
             }
-        } catch (ex) { 
+        } catch (ex) {
             alert('The Ship has not send a position, yet.')
         }
     }

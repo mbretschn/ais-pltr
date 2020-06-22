@@ -56,12 +56,9 @@ export class PopupCollectionLayer extends AbstractLayer {
             return this.removePopup(popup)
         } else {
             const popup = new ShipPopupView(ship)
-
             const content = await popup.render()
             content.setLatLng(this.getLocation(ship))
-
             this.map.openPopup(content)
-
             this.popups.push({ popup, content })
         }
     }
@@ -128,7 +125,7 @@ export class PopupCollectionLayer extends AbstractLayer {
         super.remove()
     }
 
-    public async content(): Promise<void> { 
+    public async content(): Promise<void> {
         this.subscribe('ship:clicked', this.addShipPopup)
         this.subscribe('track:clicked', this.addPositionPopup)
         this.subscribe('map:clicked', this.removePopups)

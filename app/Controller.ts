@@ -1,6 +1,6 @@
 import { ShipCollection } from 'ais-tools'
 import { Database, MessageLogger } from './lib'
-import { PageView, DrawerView, HeaderView, MapView, ShipDetailsView, PositionTableView, ShipTableView, HelpView, StatisticsView } from './views'
+import { PageView, DrawerView, HeaderView, MapView, ShipDetailsView, PositionTableView, ShipTableView, HelpView } from './views'
 import { ShipLayer, PopupCollectionLayer, TrackCollectionLayer } from './layer'
 import { default as Swal } from 'sweetalert2/src/sweetalert2.js'
 
@@ -20,11 +20,9 @@ export class Controller {
     private positionTableView?: PositionTableView
     private shipTableView: ShipTableView
     private helpView?: HelpView
-    private statisticsView?: StatisticsView
 
     private trackHistory: boolean = true
     private helpShown: boolean = false
-    private statisticsShown: boolean = false
 
     constructor() {
         this.logger = new MessageLogger()
@@ -59,8 +57,6 @@ export class Controller {
         document.addEventListener('request:load:history', this.responseLoadHistory, false)
         document.addEventListener('request:help:shown', this.responseHelpShown, false)
         document.addEventListener('request:show:help', this.responseShowHelp, false)
-        document.addEventListener('request:statistics:shown', this.responseStatisticsShown, false)
-        document.addEventListener('request:statistics:show', this.responseStatisticsShow, false)
 
         document.addEventListener('visibilitychange', this.handleVisibilityChange, false)
         document.addEventListener('view:shown', this.viewShow)
@@ -73,24 +69,10 @@ export class Controller {
         document.dispatchEvent(new CustomEvent('response:ships', { detail: this.ships }))
     }
 
-    private responseStatisticsShown = (): void => {
-        document.dispatchEvent(new CustomEvent('response:statistics:shown', { detail: this.statisticsShown }))
-    }
-
-    private responseStatisticsShow = async (ev: any): Promise<void> => {
-        this.statisticsView = new StatisticsView()
-        await this.statisticsView.render()
-    }
-
     private viewShow = (ev: any): void => {
         if (ev.detail.name === 'HelpView') {
             this.helpShown = true
             this.responseHelpShown()
-        }
-
-        if (ev.detail.name === 'StatisticsView') {
-            this.helpShown = true
-            this.responseStatisticsShown()
         }
     }
 
@@ -98,11 +80,6 @@ export class Controller {
         if (ev.detail.name === 'HelpView') {
             this.helpShown = false
             this.responseHelpShown()
-        }
-
-        if (ev.detail.name === 'StatisticsView') {
-            this.helpShown = false
-            this.responseStatisticsShown()
         }
     }
 
@@ -178,8 +155,6 @@ export class Controller {
         await this.shipLayer.remove()
         await this.popupCollectionLayer.remove()
         await this.trackCollectionLayer.remove()
-
-        // console.log('removed')
     }
 
     public async initialize(): Promise<void> {
@@ -196,10 +171,8 @@ export class Controller {
         await this.trackCollectionLayer.render()
 
         document.dispatchEvent(new CustomEvent('unset:waitstate'))
-
-        // console.log('rendered')
     }
-    
+
     private handleVisibilityChange = async (ev: any): Promise<void> => {
         if (document['hidden']) {
             this.finalize()
