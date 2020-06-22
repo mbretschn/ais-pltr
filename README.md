@@ -21,18 +21,22 @@ The application only covers to the area of the Port of Hamburg. Usually there ar
 
 #### The Map
 The center of the application is a map on which the ship positions are rendered. The red dot indicates the mounting position ofthe AIS transceiver. Unfortunately, not all ships report the exact direction in which the bow is pointing. In this case, the ships are shown as a simple marker when they are not moving and this information cannot be derived from the course of the ship.
+
 ![Arrival area of the port ferries at Hamburg Landungsbrücken](https://3epnm.de/image/efbe8f618164441d3d17bf9bb243b713?width=400)
 
 #### The Ship Table
 The Ship table can be opened via the main menu drawer. The latter is shown if the user activates the menu icon in the top, left corner. If a ship in this table has updates, the corresponding row is animated. The table can be sorted if the user clicks on a column header. On the top right of the ship table a search field is located, where the table can be filtered by name, type or MMSI of a ship. A function, where the table can be filtered by port ferries can be found left from the search field. A click on a row centers the map to the current position of the selected vessel.
+
 ![The ship table filtered by port ferries](https://3epnm.de/image/f9d6c96e2e14a4fcd4c2e8d3b4204965?width=400)
 
 #### Vessel Detail Views
 If the User clicks on a ship marker, a popup with some details about the ship is shown as well as a ship image, if a free to use image is available. The popup offers a more detailed view to see all up-to-date AIS Details. When clicked on the Details button, a modal with two tabs is shown. The first tab, `Ship Data`, shows static and voyage related data. The second tab, `Position`, shows the current position report. The fields are updated, if changes occur.
+
 ![The port ferry Altenwerder underway](https://3epnm.de/image/85c4684b78de4168f7f8f87b35896bca?width=400)
 
 #### Positions Table and Position Lock
 The position table can be opened via the `Positions` button of the ship popup. In the position table, the history of positions can be viewed where the most recent report is displayed on top. The table is updated if a new position report occurs. The user can use the `Lock` function found in the top right corner of the position table to automatically re-center the map to the most recent position of the selected ship if it moves.
+
 ![Position table for port ferry Oortkaten](https://3epnm.de/image/98651f165dbd84dba632ec98d3e3bab5?width=400)
 
 #### Track Rendering
