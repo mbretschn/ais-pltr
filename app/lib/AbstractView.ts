@@ -126,7 +126,6 @@ export abstract class AbstractView extends EventEmitter {
             name: this.name,
             view: this
         })
-        //console.log(name, eventData)
         document.dispatchEvent(new CustomEvent(name, { detail: eventData }))
     }
 

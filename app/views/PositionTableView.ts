@@ -1,3 +1,4 @@
+import { default as L } from 'leaflet'
 import { default as Queue } from 'better-queue'
 import { default as MemoryStore } from 'better-queue-memory'
 import { Ship, INmeaPositionDB, INmeaPosition } from 'ais-tools'
@@ -132,7 +133,7 @@ export class PositionTableView extends AbstractView {
         if (tr && tr.dataset.rowId) {
             const position = await positions.find({ _id: tr.dataset.rowId })
             if (position) {
-                this.broadcast('position:selected', { position: position })
+                this.broadcast('position:selected', { position: position, options: { paddingBottomRight: L.point(0, 480) } })
             }
         }
     }

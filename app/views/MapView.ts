@@ -37,13 +37,13 @@ export class MapView extends AbstractView {
 
     public centerPosition = (ev: any): void => {
         const coord = ev.detail.position.Location.coordinates
-        const latlng = L.latLng([ coord[1], coord[0] ])
-        this._map.setView(latlng, 17)
+        const options = ev.detail.options || {}
+        this.setView({ lat: coord[1], lng: coord[0] }, options)
     }
 
     public setView(location: ILatLng, options: any = {}): void {
         const latlng = L.latLng(location)
-        this._map.setView(latlng, 17, options)
+        this._map.fitBounds(latlng.toBounds(300), options)
     }
 
     public setBounds = (): void => {
@@ -161,10 +161,13 @@ export class MapView extends AbstractView {
     }
 
     public async content(): Promise<void> {
-        this._map = L.map(this.el, { 
-            zoomControl: false, 
+        this._map = L.map(this.el, {
+            zoomControl: false,
             maxBounds: this.options.maxBounds
         }).setView(this.options.center, this.options.zoom)
+
+        this._map.createPane('tracks')
+        this._map.createPane('ships')
 
         L.tileLayer(this.options.url, {
             maxZoom: this.options.maxZoom,

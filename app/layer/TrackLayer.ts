@@ -3,7 +3,6 @@ import { FeatureCollection } from 'geojson'
 import { Color, Ship, NmeaPositionFeature } from 'ais-tools'
 import { AbstractLayer } from '../lib/index'
 import { MapView } from '../views'
-import { resolveCname } from 'dns'
 
 export class TrackLayer extends AbstractLayer {
     public name: string = 'track'
@@ -12,7 +11,6 @@ export class TrackLayer extends AbstractLayer {
     public ship: Ship
     private map: MapView
     private layer?: any
-    private color?: Color
 
     constructor(ship: Ship, map: MapView) {
         super()
@@ -54,7 +52,7 @@ export class TrackLayer extends AbstractLayer {
     }
 
     public addFragment = async (position: NmeaPositionFeature) => {
-        const features = await position.toTrackFragment(2)
+        const features = await this.ship.toTrackFragment(position)
         this.layer.addData(features)
     }
 
@@ -78,8 +76,7 @@ export class TrackLayer extends AbstractLayer {
     }
 
     public async content(color: Color): Promise<void> {
-        this.color = color
-        this.ship.positions.color = this.color
+        this.ship.color = color
 
         this.broadcast('set:waitstate')
 
@@ -99,11 +96,12 @@ export class TrackLayer extends AbstractLayer {
 
         const featureCollection: FeatureCollection = {
             'type': 'FeatureCollection',
-            'features': await this.ship.positions.toTrack(2)
+            'features': await this.ship.toTrack()
         }
 
         this.layer = L.geoJSON(featureCollection, {
             onEachFeature: this.onEachFeature,
+            pane: 'tracks',
             style: <(feature: any) => any>this.style
         })
 

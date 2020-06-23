@@ -7,7 +7,6 @@ export declare class TrackLayer extends AbstractLayer {
     ship: Ship;
     private map;
     private layer?;
-    private color?;
     constructor(ship: Ship, map: MapView);
     private title;
     private onEachFeature;

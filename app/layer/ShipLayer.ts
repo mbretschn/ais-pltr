@@ -1,5 +1,5 @@
 import { default as L } from 'leaflet'
-import { ShipCollection, Ship, NmeaPositionFeature } from 'ais-tools'
+import { ShipCollection, Ship } from 'ais-tools'
 import { AbstractLayer } from '../lib/index'
 import { MapView } from '../views/index'
 
@@ -23,7 +23,8 @@ export class ShipLayer extends AbstractLayer {
         return L.circleMarker(latlng, {
             radius: 4,
             opacity: 1,
-            fillOpacity: 0.8
+            fillOpacity: 0.8,
+            pane: 'ships'
         })
     }
 
@@ -163,6 +164,7 @@ export class ShipLayer extends AbstractLayer {
         this.layer = L.geoJSON(featureCollection, {
             pointToLayer: this.pointToLayer,
             onEachFeature: this.onEachFeature,
+            pane: 'ships',
             style: <(feature: any) => any>this.style
         })
 

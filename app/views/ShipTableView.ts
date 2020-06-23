@@ -1,3 +1,4 @@
+import { default as L } from 'leaflet'
 import { INmeaShipdataDB, ShipCollection, INmeaModel, INmeaShipdata } from 'ais-tools'
 import { AbstractView } from '../lib'
 import { CloseIconButtonView, ShipTableBookmarksButtonView } from '../buttons'
@@ -143,7 +144,7 @@ export class ShipTableView extends AbstractView {
         try {
             const ship = await this.collection.findByMMSI(mmsi, { cache: true, force: false })
             if (ship) {
-                this.broadcast('position:selected', { position: ship.position })
+                this.broadcast('position:selected', { position: ship.position, options: { paddingTopLeft: L.point(0, 480) } })
                 this.broadcast('ship:selected', { ship })
             }
         } catch (ex) {
