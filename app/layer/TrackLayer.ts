@@ -3,6 +3,7 @@ import { FeatureCollection } from 'geojson'
 import { Color, Ship, NmeaPositionFeature } from 'ais-tools'
 import { AbstractLayer } from '../lib/index'
 import { MapView } from '../views'
+import { resolveCname } from 'dns'
 
 export class TrackLayer extends AbstractLayer {
     public name: string = 'track'
@@ -52,6 +53,19 @@ export class TrackLayer extends AbstractLayer {
     }
 
     public addFragment = async (position: NmeaPositionFeature) => {
+        const hasLayer = await new Promise(resolve => {
+            this.layer.eachLayer(layer => {
+                if (layer.feature.properties._id === position._id) {
+                    resolve(true)
+                }
+            })
+            resolve(false)
+        })
+
+        if (hasLayer) {
+            return
+        }
+
         const features = await this.ship.toTrackFragment(position)
         this.layer.addData(features)
     }

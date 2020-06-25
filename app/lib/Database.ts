@@ -76,9 +76,31 @@ export class Database extends AbstractDatabase implements IDatabase {
         this.socket.off('positions', this.onPositions)
         this.socket.off('ships', this.onShips)
         this.socket.off('reconnect', this.reconnect)
+
+        // this.socket.off('connect', (ev: any) => console.log('connect'))
+        // this.socket.off('connect_error', (ev: any) => console.log('connect_error'))
+        // this.socket.off('connect_timeout', (ev: any) => console.log('connect_timeout'))
+        // this.socket.off('error', (ev: any) => console.log('error'))
+        // this.socket.off('disconnect', (ev: any) => console.log('disconnect'))
+        // this.socket.off('reconnect', (ev: any) => console.log('reconnect'))
+        // this.socket.off('reconnect_attempt', (ev: any) => console.log('reconnect_attempt'))
+        // this.socket.off('reconnecting', (ev: any) => console.log('reconnecting'))
+        // this.socket.off('reconnect_error', (ev: any) => console.log('reconnect_error'))
+        // this.socket.off('reconnect_failed', (ev: any) => console.log('reconnect_failed'))
     }
 
     private subscribe(): void {
+        // this.socket.on('connect', (ev: any) => console.log('connect'))
+        // this.socket.on('connect_error', (ev: any) => console.log('connect_error'))
+        // this.socket.on('connect_timeout', (ev: any) => console.log('connect_timeout'))
+        // this.socket.on('error', (ev: any) => console.log('error'))
+        // this.socket.on('disconnect', (ev: any) => console.log('disconnect'))
+        // this.socket.on('reconnect', (ev: any) => console.log('reconnect'))
+        // this.socket.on('reconnect_attempt', (ev: any) => console.log('reconnect_attempt'))
+        // this.socket.on('reconnecting', (ev: any) => console.log('reconnecting'))
+        // this.socket.on('reconnect_error', (ev: any) => console.log('reconnect_error'))
+        // this.socket.on('reconnect_failed', (ev: any) => console.log('reconnect_failed'))
+
         this.socket.on('positions', this.onPositions)
         this.socket.on('ships', this.onShips)
         this.socket.on('reconnect', this.reconnect)

@@ -83,6 +83,19 @@ export class ShipLayer extends AbstractLayer {
                 ship = data.detail.ship
             }
 
+            const hasLayer = await new Promise(resolve => {
+                this.layer.eachLayer(layer => {
+                    if (layer.feature.properties._pid === ship.position._id) {
+                        resolve(true)
+                    }
+                })
+                resolve(false)
+            })
+
+            if (hasLayer) {
+                return
+            }
+
             this.layer.eachLayer(layer => {
                 if (layer.feature.properties.mmsi === mmsi) {
                     this.layer.removeLayer(layer)
