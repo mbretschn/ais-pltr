@@ -17,9 +17,9 @@ export declare class Database extends AbstractDatabase implements IDatabase {
     connected: boolean;
     timer: any;
     constructor(config: any);
-    private reconnect;
     private unsubscribe;
     private subscribe;
+    private reconnect;
     connect(): Promise<undefined>;
     disconnect(): Promise<undefined>;
     private onPositions;

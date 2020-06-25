@@ -1,6 +1,5 @@
 import { default as io } from 'socket.io-client'
 import { default as moment } from 'moment'
-import { default as Noty } from 'noty'
 import { EventEmitter } from 'events'
 import { v4 as uuidv4 } from 'uuid'
 import { AbstractDatabase, TColNames, IQuery, INmeaFetchConfig, INmeaModel, INmeaShipdata, INmeaPosition, IDatabase } from 'ais-tools'
@@ -66,10 +65,6 @@ export class Database extends AbstractDatabase implements IDatabase {
         window.addEventListener("beforeunload", this.disconnect, false)
     }
 
-    private reconnect = (ev:any) => {
-        this.socket.emit('subscribe', { uuid: this.uuid })
-    }
-
     private unsubscribe(): void {
         this.socket.emit('unsubscribe', { uuid: this.uuid })
 
@@ -108,6 +103,14 @@ export class Database extends AbstractDatabase implements IDatabase {
         this.socket.emit('subscribe', { uuid: this.uuid })
     }
 
+    private reconnect = (ev:any) => {
+        this.socket.emit('subscribe', { uuid: this.uuid })
+        this.timer = setTimeout(() => {
+            this.disconnect()
+            this.connect()
+        }, 10000)
+    }
+
     async connect(): Promise<undefined> {
         if (this.connected) return
         this.connected = true
@@ -128,12 +131,18 @@ export class Database extends AbstractDatabase implements IDatabase {
     }
 
     private onPositions = (data: INmeaPosition) => {
+        this.timer && clearTimeout(this.timer)
+        this.timer = undefined
+
         for (let i = 0; i < this.emitters.length; i++) {
             this.emitters[i].add('NmeaPosition', data)
         }
     }
 
     private onShips = (data: INmeaShipdata) => {
+        this.timer && clearTimeout(this.timer)
+        this.timer = undefined
+
         for (let i = 0; i < this.emitters.length; i++) {
             this.emitters[i].add('NmeaShipdata', data)
         }
