@@ -20,7 +20,7 @@ export class PageView extends AbstractView {
                     <div class="data-table-container positions"></div>
                     <div class="dialog shipdata__details"></div>
                     <div class="dialog help"></div>
-                    <div class="dialog statistic"></div>
+                    <div class="dialog login"></div>
                     <div class="dialog alert"></div>
             </main>
             <div class="mdc-dialog"></div>`)

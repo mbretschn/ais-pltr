@@ -1,0 +1,54 @@
+.login {
+    display: none;
+    z-index: 10000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    .login-container {
+        width: 430px;
+        height: 400px;
+        position: absolute;
+        top: calc(50vh - 200px);
+        left: calc(50vw - 215px);
+        background-color: #fff;
+        border-radius: 4px;
+        .mdc-list-item {
+            height: 100px;
+            .mdc-text-field {
+                margin: 20px;
+            }
+        }
+
+        .mdc-linear-progress__bar-inner {
+            border-color: rgb(241, 52, 52) !important;
+        }
+
+        .message {
+            visibility: hidden;
+            &.error {
+                visibility: visible;
+                background-color: rgba(255, 229, 229, 0.913);
+                color: rgba(208, 15, 15, 0.878);
+                padding: 20px;
+                margin: 0px;
+            }
+            &.success {
+                visibility: visible;
+                background-color: rgba(235, 255, 229, 0.913);
+                color: #3e9400;
+                padding: 20px;
+                margin: 0px;
+            }
+        }
+
+        .mdc-dialog__actions {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+        }
+    }
+}

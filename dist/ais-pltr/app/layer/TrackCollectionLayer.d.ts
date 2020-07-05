@@ -20,7 +20,7 @@ export declare class TrackCollectionLayer extends AbstractLayer {
     private open;
     close: () => Promise<void>;
     private selected;
-    private accept;
+    accept: () => Promise<void>;
     attachEvents(): boolean;
     detachEvents(): boolean;
     content(): Promise<void>;

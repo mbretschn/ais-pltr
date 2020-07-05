@@ -6,6 +6,7 @@ header {
     .mdc-linear-progress__bar-inner {
         border-color: rgb(241, 52, 52) !important;
     }
+    min-width: 420px;
 }
 
 @media only screen and (max-device-width: 480px) {

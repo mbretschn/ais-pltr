@@ -8,10 +8,10 @@ export declare class ShipImageView extends AbstractView {
     private uuid;
     private ship;
     private dropzone?;
-    private isUploadAllowd;
     constructor(selector: string, ship: Ship);
     preRender(): string;
     private update;
+    private error;
     attachEvents(): boolean;
     detachEvents(): boolean;
     image(): Promise<string[]>;

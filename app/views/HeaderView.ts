@@ -1,5 +1,5 @@
 import { AbstractView } from '../lib'
-import { ShowDrawerButtonView, MapZoomInButtonView, MapZoomOutButtonView, HelpIconButtonView, UnlockIconButtonView, BookmarksButtonView } from '../buttons'
+import { ShowDrawerButtonView, MapZoomInButtonView, MapZoomOutButtonView, HelpIconButtonView, UnlockIconButtonView, BookmarksButtonView, LoginIconButtonView } from '../buttons'
 
 export class HeaderView extends AbstractView {
     public name: string = 'Header'
@@ -17,6 +17,7 @@ export class HeaderView extends AbstractView {
         this.add('lock', new UnlockIconButtonView(this.selector))
         this.add('bookmarks', new BookmarksButtonView(this.selector))
         this.add('help', new HelpIconButtonView(this.selector))
+        this.add('login', new LoginIconButtonView(this.selector))
 
         this.subscribe('view:showing', this.setWaitState)
         this.subscribe('view:hiding', this.setWaitState)
@@ -74,6 +75,7 @@ export class HeaderView extends AbstractView {
         html.push(this.get('lock').preRender())
         html.push(this.get('bookmarks').preRender())
         html.push(this.get('help').preRender())
+        html.push(this.get('login').preRender())
 
         html.push(`</section>
             </div>

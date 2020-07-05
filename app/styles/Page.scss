@@ -18,11 +18,12 @@ body {
   width: 100%;
   height: calc(100% - 64px);
   margin-top: 64px;
+  min-width: 420px;
 }
 
-@media only screen and (max-device-width: 480px) {
+@media (max-width: 599px) {
   .main-content {
-    height: calc(100% - 55px);
-    margin-top: 55px;
+    height: calc(100% - 56px);
+    margin-top: 56px;
   }
 }

@@ -162,7 +162,7 @@ export class TrackCollectionLayer extends AbstractLayer {
         }
     }
 
-    private accept = () => {
+    public accept = async (): Promise<void> => {
         const checked = document.querySelectorAll('input:checked')
         for (const item of checked) {
             this.removeFromMap(Number((item as HTMLInputElement).dataset.mmsi))

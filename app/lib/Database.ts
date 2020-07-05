@@ -106,8 +106,9 @@ export class Database extends AbstractDatabase implements IDatabase {
     private reconnect = (ev:any) => {
         this.socket.emit('subscribe', { uuid: this.uuid })
         this.timer = setTimeout(() => {
+            this.socket.once('disconnect', (ev: any) => console.log('!!!'))
             this.disconnect()
-            this.connect()
+            // this.connect()
         }, 10000)
     }
 

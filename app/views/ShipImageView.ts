@@ -1,7 +1,8 @@
 import { default as Dropzone } from 'dropzone'
 import { v4 as uuidv4 } from 'uuid'
 import { Ship } from 'ais-tools'
-import { AbstractView } from '../lib'
+import { AbstractView, auth } from '../lib'
+import { default as Swal } from 'sweetalert2/src/sweetalert2.js'
 
 export class ShipImageView extends AbstractView {
     public name: string = 'ShipImageView'
@@ -12,7 +13,6 @@ export class ShipImageView extends AbstractView {
     private uuid: string
     private ship: Ship
     private dropzone?: Dropzone
-    private isUploadAllowd: boolean = false
 
     constructor(selector: string, ship: Ship) {
         super()
@@ -23,6 +23,7 @@ export class ShipImageView extends AbstractView {
         this.replace = `.${this.class}`
 
         this.subscribe('ship:image:success', this.render)
+        this.subscribe(`response:login`, this.render)
     }
 
     public preRender(): string {
@@ -33,17 +34,27 @@ export class ShipImageView extends AbstractView {
         this.broadcast('ship:image:success')
     }
 
-    public attachEvents(): boolean {
-        if (this.isUploadAllowd) {
-            try {
-                this.dropzone = new Dropzone(this.element(this.replace, true), {
-                    url: '/api/image',
-                    clickable: false
-                })
-                this.dropzone.on('success', this.update)
-            } catch (ex) {
+    private error = (file, message) => {
+        auth.logout()
 
-            }
+        Swal.fire({
+            icon: 'error',
+            title: 'Not successful',
+            text: message
+        })
+
+        this.render()
+    }
+
+    public attachEvents(): boolean {
+        if (auth.isLogin) {
+            this.dropzone = new Dropzone(this.element(this.replace, true), {
+                url: '/api/image',
+                clickable: false,
+                headers: auth.header
+            })
+            this.dropzone.on('success', this.update)
+            this.dropzone.on('error', this.error)
         }
 
         return super.attachEvents()
@@ -52,6 +63,7 @@ export class ShipImageView extends AbstractView {
     public detachEvents(): boolean {
         if (this.dropzone) {
             this.dropzone.off('success', this.update)
+            this.dropzone.off('error', this.error)
             this.dropzone.destroy()
         }
 
@@ -91,7 +103,7 @@ export class ShipImageView extends AbstractView {
             html.push(`<div class="dz-default dz-message"></div>`)
         } catch (ex) {
             html.push(`<div class="dz-default dz-message">`)
-            if (this.isUploadAllowd) {
+            if (auth.isLogin) {
                 html.push(`<button class="dz-button" type="button">Drop files here to upload</button>`)
             } else {
                 html.push(`<button class="dz-button" type="button">You need privileges to add a new picture</button>`)
@@ -109,12 +121,12 @@ export class ShipImageView extends AbstractView {
         this.element(this.replace).replaceWith(await this.content())
         try {
             this.element('.mdc-linear-progress').classList.remove('mdc-linear-progress--indeterminate')
-        } catch (ex) { 
+        } catch (ex) {
             if (!this.isDestoryed && !this.isDestroying) {
                 console.error(ex)
             }
         }
-        
+
         await this.afterRender()
     }
 }

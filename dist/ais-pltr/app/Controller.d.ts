@@ -13,6 +13,7 @@ export declare class Controller {
     private positionTableView?;
     private shipTableView;
     private helpView?;
+    private loginView?;
     private trackHistory;
     private helpShown;
     constructor();
@@ -21,6 +22,7 @@ export declare class Controller {
     private viewHide;
     private responseHelpShown;
     private responseShowHelp;
+    private responseShowLogin;
     private responseToggleHistory;
     private responseLoadHistory;
     private responseLockedMMSI;

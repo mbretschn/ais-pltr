@@ -1,6 +1,6 @@
 import { ShipCollection } from 'ais-tools'
-import { Database, MessageLogger } from './lib'
-import { PageView, DrawerView, HeaderView, MapView, ShipDetailsView, PositionTableView, ShipTableView, HelpView } from './views'
+import { Auth, auth, Database, MessageLogger } from './lib'
+import { PageView, DrawerView, HeaderView, MapView, ShipDetailsView, PositionTableView, ShipTableView, HelpView, LoginView } from './views'
 import { ShipLayer, PopupCollectionLayer, TrackCollectionLayer } from './layer'
 import { default as Swal } from 'sweetalert2/src/sweetalert2.js'
 
@@ -20,6 +20,7 @@ export class Controller {
     private positionTableView?: PositionTableView
     private shipTableView: ShipTableView
     private helpView?: HelpView
+    private loginView?: LoginView
 
     private trackHistory: boolean = true
     private helpShown: boolean = false
@@ -57,6 +58,7 @@ export class Controller {
         document.addEventListener('request:load:history', this.responseLoadHistory, false)
         document.addEventListener('request:help:shown', this.responseHelpShown, false)
         document.addEventListener('request:show:help', this.responseShowHelp, false)
+        document.addEventListener('request:show:login', this.responseShowLogin, false)
 
         document.addEventListener('visibilitychange', this.handleVisibilityChange, false)
         document.addEventListener('view:shown', this.viewShow)
@@ -87,21 +89,26 @@ export class Controller {
         document.dispatchEvent(new CustomEvent('response:help:shown', { detail: this.helpShown }))
     }
 
-    private responseShowHelp = async (ev: any): Promise<void> => {
+    private responseShowHelp = async (): Promise<void> => {
         this.helpView = new HelpView()
         await this.helpView.render()
     }
 
-    private responseToggleHistory = (ev: any): void => {
+    private responseShowLogin = async (): Promise<void> => {
+        this.loginView = new LoginView()
+        await this.loginView.render()
+    }
+
+    private responseToggleHistory = (): void => {
         this.trackHistory = !this.trackHistory
         document.dispatchEvent(new CustomEvent('response:load:history', { detail: this.trackHistory }))
     }
 
-    private responseLoadHistory = (ev: any): void => {
+    private responseLoadHistory = (): void => {
         document.dispatchEvent(new CustomEvent('response:load:history', { detail: this.trackHistory }))
     }
 
-    private responseLockedMMSI = (ev: any): void => {
+    private responseLockedMMSI = (): void => {
         document.dispatchEvent(new CustomEvent('response:locked:mmsi', { detail: this.shipLayer.lockedMMSI() }))
     }
 

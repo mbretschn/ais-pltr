@@ -20,6 +20,7 @@ export abstract class AbstractView extends EventEmitter {
     private animationSpeed: string = 'faster'
 
     public close = async (): Promise<void> => { }
+    public accept = async (): Promise<void> => { }
     public refresh = async (): Promise<void> => { }
 
     public add(name: string, view: any) {

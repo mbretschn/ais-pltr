@@ -1,22 +1,19 @@
 import { AbstractView, AbstractButtonView } from '../lib/index'
 
-export class CloseButtonView extends AbstractButtonView {
-    public name: string = 'Close'
-    public textA: string = 'Close'
+export class AcceptButtonView extends AbstractButtonView {
+    public name: string = 'Accept'
+    public textA: string = ''
     public textB: string = ''
     public classList: string = 'mdc-button mdc-card__action mdc-card__action--button'
     private view: AbstractView
-    private isDisabled: boolean = false
+    private isDisabled: boolean = true
 
-    constructor(selector: string, view: AbstractView) {
+    constructor(selector: string, text: string, view: AbstractView) {
         super(selector)
         this.view = view
+        this.textA = text
 
-        this.register('click', 'button.close', this.close)
-    }
-
-    public close = async (): Promise<void> => {
-        await this.view.close()
+        this.register('click', 'button.accept', this.close)
     }
 
     public set disable(isDisabled: boolean) {
@@ -24,9 +21,13 @@ export class CloseButtonView extends AbstractButtonView {
         this.render()
     }
 
+    public close = async (): Promise<void> => {
+        await this.view.accept()
+    }
+
     public async content(): Promise<DocumentFragment> {
         return this.toDocumentFragment(`<button
-            class="${this.class} close ${this.classList}"${this.isDisabled && ' disabled="disabled"'}
+            class="${this.class} accept ${this.classList}"${this.isDisabled && ' disabled="disabled"'}
             aria-label="${this.textA}">${this.textA}</button>`)
     }
 }

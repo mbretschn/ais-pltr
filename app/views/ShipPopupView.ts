@@ -1,4 +1,3 @@
-import { MDCLinearProgress } from '@material/linear-progress'
 import { default as L, Popup } from 'leaflet'
 import { Ship } from 'ais-tools'
 import { AbstractLayer } from '../lib'
