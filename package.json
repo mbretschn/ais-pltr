@@ -66,7 +66,7 @@
     "moment": "^2.24.0",
     "node-config-ts": "2.3.1",
     "noty": "^3.2.0-beta",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "sweetalert2": "^9.10.13",
     "uuid": "^8.0.0"
   }
